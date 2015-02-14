@@ -1,0 +1,4 @@
+@mixin hide_text() {text-indent:-9999em;}
+@mixin list_stripped() {list-style:none; margin:0; padding:0;}
+@mixin off_left() {position:absolute; left:-999em; top:-999em;}
+@mixin clearfix() {content:""; display:block; clear:both; height:0;}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>
+			<%= site_name %>
+			<% if current_page.data.page_title %>
+			 - <%= current_page.data.page_title %>
+			<% end %>
+		</title>
+		<% if current_page.data.page_description %>
+		<meta name="description" content="<%= current_page.data.page_description %>">
+		<% end %>
+		<!--[if lt IE 9]>
+		<%= javascript_include_tag 'ie' %>
+		<![endif]-->
+		<%= stylesheet_link_tag 'site' %>
+	</head>
+	<body class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+		<header role="banner">
+			<h1><a href="/"><%= site_name %></a></h1>
+		</header>
+		<nav role="navigation">
+			<ul>
+				<li><a href="/">Home</a></li>
+			</ul>
+		</nav>
+		<hr>
+		<main role="main">
+			<%= yield %>
+		</main>
+		<hr>
+		<footer role="contentinfo">
+			<p>Built with love by <a href="https://abletech.nz">Abletech</a></p>
+			<% if env_name == 'development' %>
+			<ul>
+				<li><a href="/__middleman/">Middleman Config</a></li>
+			</ul>
+			<% end %>
+		</footer>
+		<%= javascript_include_tag 'site' %>
+		<% if content_for?(:javascript) %>
+			<%= yield_content :javascript %>
+		<% end %>
+		<% if ApplicationConfig.const_defined?(:GoogleAnalytics) %>
+		<%= partial "partials/google_analytics" %>
+		<% end %>
+	</body>
+</html>
