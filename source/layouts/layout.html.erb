@@ -18,12 +18,19 @@
 		<![endif]-->
 		<%= stylesheet_link_tag 'site' %>
 	</head>
-	<body class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+	<body id="body" class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+		<nav class="a11y">
+			<ul>
+				<li><a href="#menu" accesskey="m">Skip to main menu (accesskey M)</a></li>
+				<li><a href="#body" accesskey="t">Skip to top (accesskey T)</a></li>
+			</ul>
+		</nav>
 		<header role="banner">
 			<h1><a href="/"><%= site_name %></a></h1>
 		</header>
 		<nav role="navigation">
-			<ul>
+			<h2 id="menu_link">Menu</h2>
+			<ul id="menu">
 				<li><a href="/">Home</a></li>
 			</ul>
 		</nav>
@@ -35,6 +42,7 @@
 		<footer role="contentinfo">
 			<p>Built with love by <a href="https://abletech.nz">Abletech</a></p>
 			<% if env_name == 'development' %>
+			<p>Debugging</p>
 			<ul>
 				<li><a href="/__middleman/">Middleman Config</a></li>
 			</ul>

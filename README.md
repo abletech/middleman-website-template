@@ -1,6 +1,6 @@
 # Middleman Website Template
 
-Here at @abletech, we've standardised on the tools we use to generate static websites. The technology used includes:
+Here at @abletech, we've standardised on the tools we use to generate static websites. The technologies include:
 
 * Ruby
 * Middleman
@@ -12,6 +12,14 @@ Here at @abletech, we've standardised on the tools we use to generate static web
 * Travis
 * Amazon S3
 * Amazon CloudFront
+
+## Browsers supported
+
+* IE (9+)
+* Google Chrome (Edge)
+* Safari (6+)
+* Firefox (Edge)
+* Opera Mobile and Desktop (12+)
 
 ## Installation
 1. Clone this repo into a local directory
@@ -41,7 +49,7 @@ Make sure you've modified your configuration settings (as described below) befor
 
 ### Update configuration settings
 
-In the `config` folder, you'll find three .rb files, one for each of the major environments we use.
+In the `config` folder, you'll find three `.rb` files, one for each of the major environments we use. Make sure to change these settings for your own environments.
 
 ### Add the touch-icons and favicons
 
@@ -75,3 +83,4 @@ Try out our 404 template: https://github.com/AbleTech/404_search_page
 * Find a working sitemap plugin
 * Build a set of PhotoShop Actions to help generate the touch-icons
 * Add common responsive JS patterns such as menu-building, resize handling, etc.
+* Add IE8 JavaScript support (document.head, addEventListener, etc)

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'http_parser'
 gem 'middleman'
 gem 'middleman-s3_sync'
 gem 'middleman-cloudfront'
