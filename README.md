@@ -21,11 +21,32 @@ Here at @abletech, we've standardised on the tools we use to generate static web
 * Firefox (Edge)
 * Opera Mobile and Desktop (12+)
 
+## Included features
+
+* HTML
+  * Boilerplate for Mobile-first Responsive Web Design
+  * Basic Accessibility (a11y) features such as landmarks, skip-to nav
+  * Titles and meta descriptions per page
+* CSS
+  * Inline-CSS for the homepage
+* JavaScript
+  * Progressively-enhanced and post-loaded
+	* Menu toggling
+	* `data-add-class` adds classes at runtime
+	* Conditional loading of Google Analytics
+	* Polyfills down to IE8
+	* Resize handling
+* Environment
+  * Development, Staging and Production boilerplate
+  * Environment-specific debugging and conditionals
+* Testing
+  * Basic Capybara tests
+  
 ## Installation
 1. Clone this repo into a local directory
 2. Change to your new local directory
-3. bundle install
-4. bundle exec middleman server
+3. `bundle install`
+4. `middleman server`
 
 ## Building/Deploying to STAGING:
 
@@ -47,11 +68,11 @@ Make sure you've modified your configuration settings (as described below) befor
 
 ## Checklist
 
-### Update configuration settings
+### 1. Update configuration settings
 
 In the `config` folder, you'll find three `.rb` files, one for each of the major environments we use. Make sure to change these settings for your own environments.
 
-### Add the touch-icons and favicons
+### 2. Add the touch-icons and favicons
 
 Create and generate the necessary favicon and touch-icons and place them in the `source` folder.
 
@@ -68,13 +89,13 @@ Create and generate the necessary favicon and touch-icons and place them in the 
 		touch-icon-192x192.png
 		favicon.ico
 
-### Update supporting files
+### 3. Update supporting files
 
 		sitemap.xml.erb
 		robots.txt
 		humans.txt
 
-### Add a 404 page
+### 4. Add a 404 page
 
 Try out our 404 template: https://github.com/AbleTech/404_search_page
 
@@ -82,5 +103,4 @@ Try out our 404 template: https://github.com/AbleTech/404_search_page
 
 * Find a working sitemap plugin
 * Build a set of PhotoShop Actions to help generate the touch-icons
-* Add common responsive JS patterns such as menu-building, resize handling, etc.
-* Add IE8 JavaScript support (document.head, addEventListener, etc)
+* Add IE8 JavaScript support (addEventListener, etc)

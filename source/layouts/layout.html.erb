@@ -4,25 +4,23 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title>
-			<%= site_name %>
-			<% if current_page.data.page_title %>
-			 - <%= current_page.data.page_title %>
-			<% end %>
-		</title>
+		<title><%= site_name %><% if current_page.data.page_title %> - <%= current_page.data.page_title %><% end %></title>
 		<% if current_page.data.page_description %>
 		<meta name="description" content="<%= current_page.data.page_description %>">
 		<% end %>
+		<script>document.documentElement.className = 'js';</script>
+		<%= inline_stylesheet '_homepage' if current_page.data.page_classes.include? 'page_home' %>
+		<%= stylesheet_link_tag 'site' unless current_page.data.page_classes.include? 'page_home' %>
 		<!--[if lt IE 9]>
 		<%= javascript_include_tag 'ie' %>
 		<![endif]-->
-		<%= stylesheet_link_tag 'site' %>
 	</head>
-	<body id="body" class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+	<body class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+		<script>document.body.className += ' menu_closed';</script>
 		<nav class="a11y">
 			<ul>
-				<li><a href="#menu" accesskey="m">Skip to main menu (accesskey M)</a></li>
-				<li><a href="#body" accesskey="t">Skip to top (accesskey T)</a></li>
+				<li><a href="#menu">Skip to main menu</a></li>
+				<li><a href="#body">Skip to top</a></li>
 			</ul>
 		</nav>
 		<header role="banner">
@@ -48,12 +46,16 @@
 			</ul>
 			<% end %>
 		</footer>
-		<%= javascript_include_tag 'site' %>
 		<% if content_for?(:javascript) %>
 			<%= yield_content :javascript %>
 		<% end %>
-		<% if ApplicationConfig.const_defined?(:GoogleAnalytics) %>
-		<%= partial "partials/google_analytics" %>
-		<% end %>
+		<script>
+			window.addEventListener('load', function(){
+				var s = document.createElement('script');
+				s.async = 1;
+				s.src = '<%= asset_path(:js, "site") %>';
+				document.body.appendChild(s);
+			});
+		</script>
 	</body>
 </html>
