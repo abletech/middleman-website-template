@@ -18,6 +18,23 @@ set :images_dir, 'img'
 
 set :url_root, ApplicationConfig::BASE_URL
 
+patterns_prefix = 'page_patterns_'
+patterns_section_class = 'patterns'
+
+data.patterns.each do |pattern|
+	proxy "/patterns/#{pattern[:page_name]}",
+	"patterns/template.html",
+	:locals => {
+		:examples => pattern[:examples],
+		:page_name => pattern[:page_name],
+		:page_title => pattern[:page_title],
+		:page_classes => patterns_prefix + pattern[:page_name],
+		:section_class => patterns_section_class,
+		:page_description => pattern[:page_description]
+	},
+	:ignore => true
+end
+
 activate :directory_indexes
 activate :gzip
 

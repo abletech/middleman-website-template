@@ -1,21 +1,27 @@
 <!DOCTYPE html>
+<%
+	page_title = locals[:page_title] || current_page.data.page_title
+	page_description = locals[:page_description] || current_page.data.page_description
+	page_classes = locals[:page_classes] || current_page.data.page_classes
+	section_class = locals[:section_class] || current_page.data.section_class
+%>
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title><%= site_name %><% if current_page.data.page_title %> - <%= current_page.data.page_title %><% end %></title>
-		<% if current_page.data.page_description %>
-		<meta name="description" content="<%= current_page.data.page_description %>">
+		<title><%= site_name %><% if page_title %> - <%= page_title %><% end %></title>
+		<% if page_description %>
+		<meta name="description" content="<%= page_description %>">
 		<% end %>
 		<script>document.documentElement.className = 'js';</script>
-		<%= inline_stylesheet '_homepage' if current_page.data.page_classes.include? 'page_home' %>
-		<%= stylesheet_link_tag 'site' unless current_page.data.page_classes.include? 'page_home' %>
+		<%= inline_stylesheet '_homepage' if page_classes.include? 'page_home' %>
+		<%= stylesheet_link_tag 'site' unless page_classes.include? 'page_home' %>
 		<!--[if lt IE 9]>
 		<%= javascript_include_tag 'ie' %>
 		<![endif]-->
 	</head>
-	<body class="<% if current_page.data.section_class %> <%= current_page.data.section_class %><% end %><% if current_page.data.page_classes %> <%= current_page.data.page_classes %><% end %>">
+	<body class="<% if section_class %> <%= section_class %><% end %><% if page_classes %> <%= page_classes %><% end %>">
 		<script>document.body.className += ' menu_closed';</script>
 		<nav class="a11y">
 			<ul>
@@ -30,6 +36,7 @@
 			<h2 id="menu_link">Menu</h2>
 			<ul id="menu">
 				<li><a href="/">Home</a></li>
+				<li><a href="/patterns">Pattern library</a></li>
 			</ul>
 		</nav>
 		<hr>

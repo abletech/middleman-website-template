@@ -1,0 +1,19 @@
+<h1><%= locals[:page_title] %></h1>
+<p><%= locals[:page_description] %></p>
+
+<nav>
+	<ul>
+		<% locals[:examples].each do |example| %>
+		<li><a href="#section_<%= example[:filename] %>"><%= example[:name] %></a></li>
+		<% end %>
+	</ul>
+</nav>
+
+<% locals[:examples].each do |example| %>
+<section id="section_<%= example[:filename] %>">
+	<h2><%= example[:name] %></h2>
+	<div class="example_container">
+		<%= partial "partials/#{example[:filename]}.html" %>
+	</div>
+</section>
+<% end %>

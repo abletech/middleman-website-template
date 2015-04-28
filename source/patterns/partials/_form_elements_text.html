@@ -1,0 +1,291 @@
+<table class="comparison">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">At rest</th>
+      <th scope="col">Pre-filled</th>
+      <th scope="col">Errored</th>
+      <th scope="col">Disabled</th>
+    </tr>
+  </thead>
+  <tr>
+    <th scope="row"><code>&lt;input type="text"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="text" placeholder="Text">
+        <em class="field_helper">A text field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="text" placeholder="Text" value="Text">
+        <em class="field_helper">A text field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="text" placeholder="Text">
+        <em class="field_helper field_helper_error">Please enter a text value</em>
+        <em class="field_helper">A text field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="text" placeholder="Text" value="Text" disabled>
+        <em class="field_helper">A text field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="password"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="password" placeholder="Password">
+        <em class="field_helper">A password field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="password" placeholder="Password" value="Password">
+        <em class="field_helper">A password field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="password" placeholder="Password">
+        <em class="field_helper field_helper_error">Please enter a password</em>
+        <em class="field_helper">A password field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="password" placeholder="Password" value="Password" disabled>
+        <em class="field_helper">A password field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="email"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="email" placeholder="email@domain.com">
+        <em class="field_helper">An email field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="email" placeholder="email@domain.com" value="email@domain.com">
+        <em class="field_helper">An email field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="email" placeholder="email@domain.com">
+        <em class="field_helper field_helper_error">Please enter an email address</em>
+        <em class="field_helper">An email field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="email" placeholder="email@domain.com" value="email@domain.com" disabled>
+        <em class="field_helper">An email field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="tel"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="tel" placeholder="+64 (0)4 910 3100">
+        <em class="field_helper">A telephone field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="tel" placeholder="+64 (0)4 910 3100" value="+64 (0)4 910 3100">
+        <em class="field_helper">A telephone field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="tel" placeholder="+64 (0)4 910 3100">
+        <em class="field_helper field_helper_error">Please enter a telephone number</em>
+        <em class="field_helper">A telephone field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="tel" placeholder="+64 (0)4 910 3100" value="+64 (0)4 910 3100" disabled>
+        <em class="field_helper">A telephone field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="url"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="url" placeholder="https://addressfinder.nz">
+        <em class="field_helper">A URL field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="url" placeholder="https://addressfinder.nz" value="https://addressfinder.nz">
+        <em class="field_helper">A URL field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="url" placeholder="https://addressfinder.nz">
+        <em class="field_helper field_helper_error">Please enter a URL</em>
+        <em class="field_helper">A URL field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="url" placeholder="https://addressfinder.nz" value="https://addressfinder.nz" disabled>
+        <em class="field_helper">A URL field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="number"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="number" placeholder="1234567890">
+        <em class="field_helper">A number field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="number" placeholder="1234567890" value="1234567890">
+        <em class="field_helper">A number field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="number" placeholder="1234567890">
+        <em class="field_helper field_helper_error">Please enter a number</em>
+        <em class="field_helper">A number field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="number" placeholder="1234567890" value="1234567890" disabled>
+        <em class="field_helper">A number field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="date"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="date">
+        <em class="field_helper">A date field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="date" value="2014-12-31">
+        <em class="field_helper">A date field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="date">
+        <em class="field_helper field_helper_error">Please enter a date</em>
+        <em class="field_helper">A date field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="date" value="2014-12-31" disabled>
+        <em class="field_helper">A date field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="search"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="search" placeholder="cookies">
+        <em class="field_helper">A search field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="search" placeholder="cookies" value="cookies">
+        <em class="field_helper">A search field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="search" placeholder="cookies">
+        <em class="field_helper field_helper_error">Please enter a search term</em>
+        <em class="field_helper">A search field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="search" placeholder="cookies" value="cookies" disabled>
+        <em class="field_helper">A search field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;input type="file"&gt;</code></th>
+    <td>
+      <div class="field">
+        <input type="file">
+        <em class="field_helper">A file upload field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="file">
+        <em class="field_helper">A file upload field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <input type="file">
+        <em class="field_helper field_helper_error">Please select a file</em>
+        <em class="field_helper">A file upload field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <input type="file" disabled>
+        <em class="field_helper">A file upload field</em>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row"><code>&lt;textarea&gt;</code></th>
+    <td>
+      <div class="field">
+        <textarea placeholder="Lorem ipsum."></textarea>
+        <em class="field_helper">A textarea field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <textarea placeholder="Lorem ipsum.">Lorem ipsum.</textarea>
+        <em class="field_helper">A textarea field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field field_error">
+        <textarea placeholder="Lorem ipsum."></textarea>
+        <em class="field_helper field_helper_error">Please enter your life story</em>
+        <em class="field_helper">A textarea field</em>
+      </div>
+    </td>
+    <td>
+      <div class="field">
+        <textarea placeholder="Lorem ipsum." disabled>Lorem ipsum.</textarea>
+        <em class="field_helper">A textarea field</em>
+      </div>
+    </td>
+  </tr>
+</table>

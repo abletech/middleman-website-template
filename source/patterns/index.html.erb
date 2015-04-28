@@ -1,0 +1,19 @@
+---
+page_classes: 'page_pattern_index'
+page_title: 'Pattern library'
+page_description: 'Contains all the HTML/CSS UI elements we use at Kiwibank'
+section_class: 'patterns'
+---
+<nav>
+	<ul>
+		<% data.patterns.each do |pattern| %>
+		<li><a href="<%= "/patterns/#{pattern[:page_name]}"%>"><%= pattern[:page_title] %></a>
+			<ul>
+				<% pattern.examples.each do |example| %>
+				<li><a href="<%= "/patterns/#{pattern[:page_name]}#section_#{example[:filename]}" %>"><%= example[:name] %></a></li>
+				<% end %>
+			</ul>
+		</li>
+		<% end %>
+	</ul>
+</nav>
