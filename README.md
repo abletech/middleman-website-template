@@ -9,7 +9,7 @@ Here at @abletech, we've standardised on the tools we use to generate static web
 * Autoprefixer
 * CoffeeScript/JavaScript
 * Google Analytics
-* Travis
+* Travis CI
 * Amazon S3
 * Amazon CloudFront
 
