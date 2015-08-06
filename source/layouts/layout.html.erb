@@ -10,23 +10,28 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title><%= site_name %><% if page_title %> - <%= page_title %><% end %></title>
-		<% if page_description %>
-		<meta name="description" content="<%= page_description %>">
-		<% end %>
 		<script>document.documentElement.className = 'js';</script>
+		<title><%= site_name %><% if page_title %> - <%= page_title %><% end %></title>
+		<meta property="og:site_name" content="<%= site_name %>">
+    <% if page_title %>
+    <meta property="og:title" content="<%= page_title %>">
+    <% else %>
+    <meta property="og:title" content="<%= site_name %>">
+    <% end %>
+    <meta property="og:image" content="<%= url_root %>/opengraph.png">
+    <meta property="og:url" content="<%= url_root %><%= current_page.url %>">
+    <meta property="og:type" content="website">
+    <% if page_description %>
+    <meta property="og:description" name="description" content="<%= page_description %>">
+    <% end %>
 		<%= inline_stylesheet '_homepage' if page_classes.include? 'page_home' %>
 		<%= stylesheet_link_tag 'site' unless page_classes.include? 'page_home' %>
-		<!--[if lt IE 9]>
-		<%= javascript_include_tag 'ie' %>
-		<![endif]-->
 	</head>
 	<body class="<% if section_class %> <%= section_class %><% end %><% if page_classes %> <%= page_classes %><% end %>">
-		<script>document.body.className += ' menu_closed';</script>
+		<script>document.body.className += ' js_menu_closed';</script>
 		<nav class="a11y">
 			<ul>
 				<li><a href="#menu">Skip to main menu</a></li>
-				<li><a href="#body">Skip to top</a></li>
 			</ul>
 		</nav>
 		<header role="banner">
@@ -39,11 +44,9 @@
 				<li><a href="/patterns">Pattern library</a></li>
 			</ul>
 		</nav>
-		<hr>
 		<main role="main">
 			<%= yield %>
 		</main>
-		<hr>
 		<footer role="contentinfo">
 			<p>Built with love by <a href="https://abletech.nz">Abletech</a></p>
 			<% if env_name == 'development' %>
@@ -57,12 +60,12 @@
 			<%= yield_content :javascript %>
 		<% end %>
 		<script>
-			window.addEventListener('load', function(){
+			window.onload = function(){
 				var s = document.createElement('script');
 				s.async = 1;
 				s.src = '<%= asset_path(:js, "site") %>';
 				document.body.appendChild(s);
-			});
+			}
 		</script>
 	</body>
 </html>

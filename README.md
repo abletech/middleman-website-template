@@ -26,27 +26,29 @@ Here at @abletech, we've standardised on the tools we use to generate static web
 * HTML
   * Boilerplate for Mobile-first Responsive Web Design
   * Basic Accessibility (a11y) features such as landmarks, skip-to nav
-  * Titles and meta descriptions per page
-* CSS
-  * Inline-CSS for the homepage
+  * Titles, descriptions and opengraph metadata per page
 * JavaScript
   * Progressively-enhanced and post-loaded
 	* Menu toggling
 	* `data-add-class` adds classes at runtime
 	* Conditional loading of Google Analytics
-	* Polyfills down to IE8
 	* Resize handling
 * Environment
   * Development, Staging and Production boilerplate
   * Environment-specific debugging and conditionals
 * Testing
   * Basic Capybara tests
+* Web performance optimisations
+  * Asset hashing
+  * Cache-Control and Gzipping for S3
+  * Script and stylesheet minification, concatenation
+  * Inline CSS for the homepage
   
 ## Installation
 1. Clone this repo into a local directory
 2. Change to your new local directory
 3. `bundle install`
-4. `middleman server`
+4. `middleman`
 
 ## Building/Deploying to STAGING:
 
@@ -84,10 +86,11 @@ Create and generate the necessary favicon and touch-icons and place them in the 
 		apple-touch-icon-57x57-precomposed.png
 		apple-touch-icon-72x72-precomposed.png
 		apple-touch-icon-76x76-precomposed.png
-		apple-touch-icon-precomposed.png
-		apple-touch-icon.png
+		apple-touch-icon-precomposed.png (57x57 pixels)
+		apple-touch-icon.png (180x180 pixels)
 		touch-icon-192x192.png
 		favicon.ico
+		opengraph.png (200x200 pixels)
 
 ### 3. Update supporting files
 
@@ -99,8 +102,11 @@ Create and generate the necessary favicon and touch-icons and place them in the 
 
 Try out our 404 template: https://github.com/AbleTech/404_search_page
 
+### 5. Add fallback metadata
+
+`layouts/layout.html.erb` is expecting some metadata such as titles, descriptions and opegraph RDFa data. Add fallback values here.
+
 ## TODO
 
 * Find a working sitemap plugin
 * Build a set of PhotoShop Actions to help generate the touch-icons
-* Add IE8 JavaScript support (addEventListener, etc)
