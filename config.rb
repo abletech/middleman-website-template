@@ -18,6 +18,7 @@ set :images_dir, 'img'
 
 set :url_root, ApplicationConfig::BASE_URL
 
+# This section generates the pattern-library based on data/patterns.json
 patterns_prefix = 'page_patterns_'
 patterns_section_class = 'patterns'
 
@@ -52,7 +53,7 @@ configure :build do
   activate :minify_javascript
 
   # Enable cache buster
-  activate :asset_hash, :ignore => [/touch-icon/]
+  activate :asset_hash, :ignore => [/touch-icon/, /opengraph/]
 
   activate :minify_html do |html|
     html.remove_http_protocol    = false
@@ -75,11 +76,14 @@ if ApplicationConfig.const_defined?(:S3)
     s3_sync.encryption                 = false
   end
 
-  caching_policy 'text/css', max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'text/css',               max_age: (60 * 60 * 24 * 365), public: true
   caching_policy 'application/javascript', max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/png', max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/jpeg', max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/x-icon', max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'image/gif',              max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'image/png',              max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'image/jpeg',             max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'image/x-icon',           max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'image/svg+xml',          max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'application/font-woff',  max_age: (60 * 60 * 24 * 365), public: true
   # caching_policy 'text/html', max_age: (60 * 60 * 2), public: true
 
   activate :cloudfront do |cf|

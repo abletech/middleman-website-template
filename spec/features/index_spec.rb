@@ -15,7 +15,7 @@ describe "index", js: true, type: :feature, js_errors: true do
   it "has an interactive main menu" do
     expect(page).to have_selector "#menu_link"
     find("#menu_link").click
-    expect(page).to have_selector "body:not(.menu_closed)"
+    expect(page).to have_selector "body:not(.js_menu_closed)"
   end
 
 end

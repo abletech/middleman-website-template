@@ -10,7 +10,7 @@ class UI.MenuLink
   addMenuClick: =>
     @menuLink.addEventListener 'click', (e) ->
       e.preventDefault()
-      document.body.classList.toggle('menu_closed')
+      document.body.classList.toggle('js_menu_closed')
 
   init: =>
     @addMenuClick() if @menuLink
