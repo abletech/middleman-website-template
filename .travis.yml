@@ -22,5 +22,5 @@ after_success:
   - echo "APP_ENV is $APP_ENV"
   - echo "TRAVIS_PULL_REQUEST is $TRAVIS_PULL_REQUEST"
   - bundle exec middleman build --verbose
-  - if [[ "$TRAVIS_BRANCH" = "master" ]]; then bundle exec middleman s3_sync; fi
+  - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then bundle exec middleman s3_sync; fi
   - if [[ "$TRAVIS_BRANCH" = "develop" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then bundle exec middleman s3_sync; fi
