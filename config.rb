@@ -37,7 +37,6 @@ data.patterns.each do |pattern|
 end
 
 activate :directory_indexes
-activate :gzip
 
 activate :autoprefixer do |config|
   config.browsers = ['last 2 versions', 'Explorer >= 9']
@@ -46,18 +45,24 @@ end
 
 # Build-specific configuration
 configure :build do
+  activate :gzip do |gzip|
+    gzip.exts = %w(.js .css .html .htm .svg)
+  end
   # For example, change the Compass output style for deployment
   activate :minify_css
 
   # Minify Javascript on build
   activate :minify_javascript
+  set :js_compressor, Uglifier.new(:mangle => false)
 
   # Enable cache buster
   activate :asset_hash, :ignore => [/touch-icon/, /opengraph/]
 
   activate :minify_html do |html|
     html.remove_http_protocol    = false
-    html.remove_input_attributes = false
+    html.remove_input_attributes = true
+    html.remove_quotes           = false
+    html.remove_intertag_spaces  = true
   end
 end
 
@@ -84,7 +89,10 @@ if ApplicationConfig.const_defined?(:S3)
   caching_policy 'image/x-icon',           max_age: (60 * 60 * 24 * 365), public: true
   caching_policy 'image/svg+xml',          max_age: (60 * 60 * 24 * 365), public: true
   caching_policy 'application/font-woff',  max_age: (60 * 60 * 24 * 365), public: true
-  # caching_policy 'text/html', max_age: (60 * 60 * 2), public: true
+  caching_policy 'application/font-woff2', max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'font/woff',              max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'font/woff2',             max_age: (60 * 60 * 24 * 365), public: true
+  caching_policy 'text/html',              max_age: (60 * 5), public: true
 
   activate :cloudfront do |cf|
     cf.access_key_id = ApplicationConfig::S3::ACCESS_ID

@@ -1,16 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'middleman'
+gem 'middleman', '~> 3.4.1'
+gem 'middleman-livereload'
 gem 'middleman-s3_sync'
 gem 'middleman-cloudfront'
-gem 'middleman-livereload'
 gem 'middleman-autoprefixer'
 gem 'middleman-minify-html'
-
-group :development do
-  gem 'rake'
-  gem 'rspec'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'guard-rspec', require: false
-end
+gem 'middleman-sprockets'
+gem 'uglifier'
