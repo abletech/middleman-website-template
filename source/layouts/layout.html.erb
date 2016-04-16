@@ -12,60 +12,70 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<script>document.documentElement.className = 'js';</script>
 		<title><%= site_name %><% if page_title %> - <%= page_title %><% end %></title>
-		<meta property="og:site_name" content="<%= site_name %>">
-    <% if page_title %>
-    <meta property="og:title" content="<%= page_title %>">
-    <% else %>
-    <meta property="og:title" content="<%= site_name %>">
-    <% end %>
-    <meta property="og:image" content="<%= url_root %>/opengraph.png">
-    <meta property="og:url" content="<%= url_root %><%= current_page.url %>">
-    <meta property="og:type" content="website">
-    <% if page_description %>
-    <meta property="og:description" name="description" content="<%= page_description %>">
-    <% end %>
-		<%= inline_stylesheet '_homepage' if page_classes.include? 'page_home' %>
-		<%= stylesheet_link_tag 'site' unless page_classes.include? 'page_home' %>
+		<%= partial 'partials/head_opengraph' %>
+		<%= inline_stylesheet '_manifest_home' if page_classes.include? 'page_home' %>
+		<%= stylesheet_link_tag 'manifest_site' unless page_classes.include? 'page_home' %>
 	</head>
-	<body class="<% if section_class %> <%= section_class %><% end %><% if page_classes %> <%= page_classes %><% end %>">
+	<body id="top" class="<% if section_class %> <%= section_class %><% end %><% if page_classes %> <%= page_classes %><% end %>">
 		<script>document.body.className += ' js_menu_closed';</script>
 		<nav class="a11y">
 			<ul>
 				<li><a href="#menu">Skip to main menu</a></li>
+				<li><a href="#content">Skip to content</a></li>
+				<li><a href="#top">Skip to top</a></li>
 			</ul>
 		</nav>
-		<header role="banner">
+		<header>
 			<h1><a href="/"><%= site_name %></a></h1>
 		</header>
-		<nav role="navigation">
+		<nav>
 			<h2 id="menu_link">Menu</h2>
 			<ul id="menu">
-				<li><a href="/">Home</a></li>
-				<li><a href="/patterns">Pattern library</a></li>
+				<% data.menu.each do |m| %>
+				<li id="nav_<%= m[:id] %>"><a href="<%= m[:url] %>"><%= m[:label] %></a></li>
+				<% end %>
 			</ul>
 		</nav>
-		<main role="main">
+		<main id="content">
 			<%= yield %>
 		</main>
-		<footer role="contentinfo">
-			<p>Built with love by <a href="https://abletech.nz">Abletech</a></p>
+		<footer>
+			<p><small>Built with love by <a href="https://abletech.nz">Abletech</a></small></p>
 			<% if env_name == 'development' %>
 			<p>Debugging</p>
 			<ul>
 				<li><a href="/__middleman/">Middleman Config</a></li>
+				<li><a href="/patterns/">Pattern Library</a></li>
 			</ul>
 			<% end %>
 		</footer>
+		<div id="menu_mask" class="mask"></div>
+<script>
+(function(d,w){
+	var addScript = function(url){
+		var s = d.createElement('script');
+		s.src = url;
+		d.body.appendChild(s);
+	};
+	<% if page_classes.include? 'page_home' %>
+	var addLink = function(url, rel){
+		var c = d.createElement('link');
+		c.href = url;
+		c.rel = rel;
+		d.head.appendChild(c);
+	};
+	var prefetchAssets = function(){
+		addLink('<%= asset_path(:css, "manifest_site") %>', 'prefetch');
+	};
+	w.addEventListener('load', prefetchAssets);
+	<% end %>
+	w.addEventListener('DOMContentLoaded', function(){
+		addScript('<%= asset_path(:js, "manifest_site") %>');
+	});
+})(document,window);
+</script>
 		<% if content_for?(:javascript) %>
 			<%= yield_content :javascript %>
 		<% end %>
-		<script>
-			window.onload = function(){
-				var s = document.createElement('script');
-				s.async = 1;
-				s.src = '<%= asset_path(:js, "site") %>';
-				document.body.appendChild(s);
-			}
-		</script>
 	</body>
 </html>

@@ -1,0 +1,18 @@
+<%
+	page_title = locals[:page_title] || current_page.data.page_title
+	page_description = locals[:page_description] || current_page.data.page_description
+	page_classes = locals[:page_classes] || current_page.data.page_classes
+	section_class = locals[:section_class] || current_page.data.section_class
+%>
+<meta property="og:site_name" content="<%= site_name %>">
+<% if page_title %>
+<meta property="og:title" content="<%= page_title %>">
+<% else %>
+<meta property="og:title" content="<%= site_name %>">
+<% end %>
+<meta property="og:image" content="<%= url_root %>/opengraph.png">
+<meta property="og:url" content="<%= url_root %><%= current_page.url %>">
+<meta property="og:type" content="website">
+<% if page_description %>
+<meta property="og:description" name="description" content="<%= page_description %>">
+<% end %>
