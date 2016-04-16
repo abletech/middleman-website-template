@@ -1,0 +1,9 @@
+[
+  {
+          "id": "home",
+       "label": "Home",
+     "sitemap": true,
+    "priority": 1,
+         "url": "/"
+  }
+]

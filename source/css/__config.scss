@@ -2,3 +2,11 @@
 @mixin list_stripped() {list-style:none; margin:0; padding:0;}
 @mixin off_left() {position:absolute; left:-999em; top:-999em;}
 @mixin clearfix() {content:""; display:block; clear:both; height:0;}
+
+$font-family-sans:'Helvetica Neue', 'Droid Sans', Helvetica, Arial, sans-serif;
+$font-family:$font-family-sans;
+
+$colour_background:#fff;
+$colour_font:#333;
+$colour_link:#4D9FD4;
+

@@ -32,20 +32,23 @@ Here at @abletech, we've standardised on the tools we use to generate static web
   * Titles, descriptions and opengraph metadata per page
 * JavaScript
   * Progressively-enhanced and post-loaded
-	* Menu toggling
+	* Menu toggling with click and Escape handlers
 	* `data-add-class` adds classes at runtime
 	* Conditional loading of Google Analytics
 	* Resize handling
 * Environment
   * Development, Staging and Production boilerplate
   * Environment-specific debugging and conditionals
-* Testing
-  * Basic Capybara tests
 * Web performance optimisations
   * Asset hashing
   * Cache-Control and Gzipping for S3
   * Script and stylesheet minification, concatenation
   * Inline CSS for the homepage
+  * Prefetching on window.load
+* Utilities
+  * Base64 helpers
+  * Inline CSS or Script
+  * Import CSV into the Middleman data layer
   
 ## Installation
 1. Clone this repo into a local directory
@@ -112,4 +115,5 @@ Try out our 404 template: https://github.com/AbleTech/404_search_page
 ## TODO
 
 * Find a working sitemap plugin
+* Add a decent testing framework
 * Build a set of PhotoShop Actions to help generate the touch-icons

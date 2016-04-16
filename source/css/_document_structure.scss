@@ -1,9 +1,9 @@
-@import "_vars";
-@import "_mixins";
+@import "__config";
 
-body {font:16px/1.5 $font_family; margin:1em; background:$colour_background; color:$colour_font;}
-	.a11y {@include off_left();}
-	[role="banner"] {}
-	[role="navigation"] {}
+body {font:16px/1.5 $font_family; margin:1em; background:$colour_background; color:$colour_font;
+	> header {}
+	> nav {}
 	main {}
-	[role="contentinfo"] {}
+	> footer {}
+}
+

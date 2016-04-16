@@ -1,0 +1,5 @@
+@import "__config";
+
+.mask {position:fixed; top:0; right:0; bottom:0; left:0; background:rgba(0,0,0,.3); opacity:1; transition:opacity .3s;
+	.js_menu_closed & {z-index:-1; opacity:0;}
+}
