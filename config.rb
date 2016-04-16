@@ -1,6 +1,7 @@
 env_name = ENV['APP_ENV'] || 'development'
-require "config/environments/#{env_name}"
+require "environments/#{env_name}"
 require 'helpers/asset_helpers'
+require 'helpers/csv_helpers'
 
 # Reload the browser automatically whenever files change
 configure :development do
@@ -46,22 +47,22 @@ end
 # Build-specific configuration
 configure :build do
   activate :gzip do |gzip|
-    gzip.exts = %w(.js .css .html .htm .svg)
+    gzip.exts = %w(.js .css .html .htm .svg .txt)
   end
   # For example, change the Compass output style for deployment
   activate :minify_css
 
   # Minify Javascript on build
   activate :minify_javascript
-  set :js_compressor, Uglifier.new(:mangle => false)
+  set :js_compressor, Uglifier.new()
 
   # Enable cache buster
   activate :asset_hash, :ignore => [/touch-icon/, /opengraph/]
 
   activate :minify_html do |html|
     html.remove_http_protocol    = false
-    html.remove_input_attributes = true
-    html.remove_quotes           = false
+    html.remove_input_attributes = false
+    html.remove_quotes           = true
     html.remove_intertag_spaces  = true
   end
 end
