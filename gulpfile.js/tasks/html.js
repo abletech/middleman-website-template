@@ -37,7 +37,7 @@ var htmlTask = function() {
     // .on('error', handleErrors)
     // .pipe(gulpif(global.production, htmlmin(config.tasks.html.htmlmin)))
     // .pipe(gulp.dest(paths.dest))
-    .on('end', browserSync.reload)
+    .pipe(browserSync.stream())
 
 }
 

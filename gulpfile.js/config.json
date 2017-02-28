@@ -6,12 +6,12 @@
 
   "tasks": {
     "browserSync": {
-      "proxy": "http://localhost:4567",
-      "reloadDelay": 3000
+      "proxy": "localhost:4567",
+      "reloadDelay": 1000
     },
 
     "static": {
-      "src": "./",
+      "src": "static",
       "dest": "./"
     },
 

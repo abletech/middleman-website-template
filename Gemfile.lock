@@ -95,7 +95,6 @@ PLATFORMS
 
 DEPENDENCIES
   middleman (~> 4.2)
-  tzinfo-data
 
 BUNDLED WITH
    1.14.4
