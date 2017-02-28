@@ -6,7 +6,8 @@
 
   "tasks": {
     "browserSync": {
-      "proxy": "localhost:4567"
+      "proxy": "http://localhost:4567",
+      "reloadDelay": 3000
     },
 
     "static": {
@@ -34,21 +35,21 @@
         "browsers": ["last 3 versions"]
       },
       "sass": {
-        "indentedSyntax": true,
+        "indentedSyntax": false,
         "includePaths": []
       },
       "extensions": ["sass", "scss", "css"]
     },
 
     "html": {
-      "src": "html",
+      "src": "./",
       "dest": "./",
       "dataFile": "data/global.json",
       "htmlmin": {
         "collapseWhitespace": true
       },
       "extensions": ["html", "json", "erb"],
-      "excludeFolders": ["fonts", "images", "javascripts", "layouts", "stylesheets"]
+      "excludeFolders": ["fonts", "images", "javascripts", "stylesheets"]
     },
 
     "images": {
