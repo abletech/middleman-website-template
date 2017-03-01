@@ -1,12 +1,5 @@
-###
-# Helpers
-###
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+set :env_name, ENV['APP_ENV'] || 'development'
+require "environments/#{config[:env_name]}"
 
 ###
 # Page options, layouts, aliases and proxies
@@ -36,9 +29,9 @@ set :site_short_name, 'Site'
 set :site_description, 'My site’s description'
 
 ### Environment settings
-set :env_name, 'development'
-set :url_root, 'http://localhost:4567'
-
+set :url_root,              ApplicationConfig::BASE_URL
+set :disallow_robots,       ApplicationConfig::DISALLOW_ROBOTS
+set :enable_service_worker, ApplicationConfig::ENABLE_SERVICE_WORKER
 
 activate :directory_indexes
 
@@ -46,7 +39,7 @@ activate :directory_indexes
 configure :build do
 
   activate :gzip do |gzip|
-    gzip.exts = %w(.js .css .html .htm .svg .txt .ico .eot .json)
+    gzip.exts = %w(.js .css .html .htm .svg .txt .ico .eot .json .xml)
   end
 
   activate :asset_hash, :ignore => [/manifest/, /opengraph/, /touch-icon/, /service-worker/]
