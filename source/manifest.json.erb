@@ -1,6 +1,6 @@
 {
   "name": "<%= config[:site_name] %>",
-  "short_name": "",
+  "short_name": "<%= config[:site_short_name] %>",
   "start_url": "/",
   "display": "fullscreen",
   "background_color": "#fff",
@@ -52,20 +52,24 @@
       "type": "image/png"
     }
   ],
-  // "serviceworker": {
-  //   "src": "/service-worker.js",
-  //   "scope": "/",
-  //   "use_cache": false
-  // },
+  <%#
+  "serviceworker": {
+     "src": "/service-worker.js",
+     "scope": "/",
+     "use_cache": false
+   },
+  %>
   "related_applications": [
-    // {
-    //   "platform": "play",
-    //   "url": "",
-    //   "id": ""
-    // },
-    // {
-    //   "platform": "itunes",
-    //   "url": "",
-    // }
+    <%#
+    {
+      "platform": "play",
+      "url": "",
+      "id": ""
+    },
+    {
+      "platform": "itunes",
+      "url": "",
+    }
+    %>
   ]
 }
