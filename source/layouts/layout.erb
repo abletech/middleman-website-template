@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= "#{current_page.data.title} - " if current_page.data.title %><%= config[:site_name] %></title>
+    <% if page_classes['index'] %>
+      <%= inline_css "site" %>
+      <%= partial "layouts/prefetch_domains" %>
+    <% else %>
+      <%= stylesheet_link_tag "site" unless page_classes['index'] %>
+    <% end %>
+    <%= partial "layouts/opengraph" %>
+    <link rel="manifest" href="/manifest.json">
+  </head>
+  <body id="top" class="<%= page_classes %> <%= current_page.data.additional_classes || '' %>">
+    <%= yield %>
+  </body>
+  <%= javascript_include_tag "site" %>
+</html>

@@ -1,0 +1,93 @@
+<%
+require 'digest'
+url_list = []
+ignored_file_patterns = data.offline_cache_ignore
+sitemap.resources.each do |r|
+  unless ignored_file_patterns.any? {|pattern| r.url.include? pattern}
+    url_list.push r.url
+  end
+end
+fingerprint = Digest::MD5.hexdigest(url_list.sort.join(''))
+git_revision = `git rev-parse HEAD`.chomp
+%>
+
+var APP_PREFIX = 'Abletech_';      // Identifier for this app (this needs to be consistent across every cache update)
+var FINGERPRINT = '<%= fingerprint  + git_revision %>'; // Generated hash for the URL list
+var CACHE_NAME = APP_PREFIX + FINGERPRINT;
+var URLS = [                            // Add URL you want to cache in this list.
+<% url_list.each_with_index do |r,i| %>
+  <%= "'#{r}'" %><%= ',' unless i == url_list.size - 1 %>
+<% end %>
+];
+
+// Respond with cached resources
+self.addEventListener('fetch', function(e) {
+  e.respondWith(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(e.request).then(function(response) {
+        if (response) { // if cache is available, respond with cache
+          return response;
+        }
+        // if there are no cache, try fetching request
+        return fetch(e.request.clone()).then(function(response) {
+          var matchesDomain = e.request.url.indexOf('<%= config[:url_root] %>') > -1;
+          if (response.status < 400 && matchesDomain) {
+            cache.put(e.request, response.clone());
+          }
+          return response;
+        });
+      });
+    })
+  );
+});
+
+// Cache resources
+self.addEventListener('install', function (e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      <%= "console.log('installing cache : ' + CACHE_NAME);" if config[:env_name] != 'production' %>
+      return cache.addAll(URLS);
+    })
+    .then(function() {
+      // `skipWaiting()` forces the waiting ServiceWorker to become the
+      // active ServiceWorker, triggering the `onactivate` event.
+      // Together with `Clients.claim()` this allows a worker to take effect
+      // immediately in the client(s).
+      return self.skipWaiting();
+    })
+  );
+});
+
+// Delete outdated caches
+self.addEventListener('activate', function (e) {
+  <%= "console.log('activate called');" if config[:env_name] != 'production' %>
+  e.waitUntil(
+    caches
+      /* This method returns a promise which will resolve to an array of available
+         cache keys.
+      */
+      .keys()
+      .then(function (keyList) {
+        <%= "console.log('keyList', keyList);" if config[:env_name] != 'production' %>
+        // We return a promise that settles when all outdated caches are deleted.
+        return Promise.all(
+          keyList
+            .filter(function (key) {
+              // Filter by keys that don't start with the latest version prefix.
+              return !key.startsWith(CACHE_NAME);
+            })
+            .map(function (key) {
+              /* Return a promise that's fulfilled
+                 when each outdated cache is deleted.
+              */
+              return caches.delete(key);
+            })
+        );
+      })
+      .then(function(){
+        <%= "console.log('WORKER: self.clients.claim()');" if config[:env_name] != 'production' %>
+        return self.clients.claim();
+      })
+      <%= ".then(function() {console.log('WORKER: activate completed.');})" if config[:env_name] != 'production' %>
+  );
+});

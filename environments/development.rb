@@ -1,8 +1,5 @@
 module ApplicationConfig
   BASE_URL = 'http://localhost:4567'
-
-  # module GoogleAnalytics
-  #   TRACKING_KEY = 'FIXME'
-  # end
-
+  DISALLOW_ROBOTS = true
+  ENABLE_SERVICE_WORKER = false
 end

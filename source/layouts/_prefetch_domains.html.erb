@@ -1,0 +1,9 @@
+<%
+if data.prefetch_domains.any?
+  data.prefetch_domains.each do |d|
+%>
+<link rel="dns-prefetch" href="<%= d %>">
+<%
+  end
+end
+%>

@@ -1,0 +1,7 @@
+<% if current_page.data.description %>
+<meta property="og:title" content="<%= config[:site_name] %><%= " - #{current_page.data.title}" if current_page.data.title %>">
+<meta property="og:image" content="<%= config[:url_root] %>/opengraph.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<%= config[:url_root] %><%= current_page.url %>">
+<meta property="og:description" name="description" content="<%= current_page.data.description %>">
+<% end %>
