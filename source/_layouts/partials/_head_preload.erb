@@ -1,0 +1,7 @@
+<%
+if data.preload_assets.count > 0
+  data.preload_assets.each do |entry|
+%><link rel="preload" href="<%= entry.href %>" as="<%= entry.as %>"><%
+  end
+end
+%>

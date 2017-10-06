@@ -26,10 +26,6 @@ serverConfig.module = {
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-          { // Creates style nodes from JS strings
-            // See: https://webpack.js.org/loaders/style-loader/
-            loader: 'style-loader'
-          },
           { // translates CSS into CommonJS
             // See: https://webpack.js.org/loaders/css-loader/
             loader: 'css-loader'
@@ -71,7 +67,7 @@ serverConfig.module = {
 
 serverConfig.output = {
   path: PATHS.DIST_JS,
-  filename: 'js/[name].js'
+  filename: '[name].js'
 };
 
 serverConfig.plugins = [
@@ -85,7 +81,7 @@ serverConfig.plugins = [
 
   new ExtractTextPlugin({
     filename: (path) => {
-      return path('css/[name].css').replace('css/js', 'css');
+      return path('js/[name].css').replace('js/', '../css/');
     },
     allChunks: true
   }),

@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= data.site.lang || 'en' %>">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= current_page.data.title || "Middleman" %></title>
-    <link rel="stylesheet" href="<%= asset_path(:css, 'main') %>">
+    <title><%= current_page.data.title || data.site.title %> | <%= data.site.name %></title>
+    <% if current_page.url == '/' %>
+      <%= inline_css 'css/manifest.home.css' %>
+    <% else %>
+      <link rel="stylesheet" href="<%= asset_path(:css, 'manifest.main') %>">
+    <% end %>
+    <%= partial '_layouts/partials/head_preload' %>
+    <%= partial '_layouts/partials/head_dns_prefetch' %>
+    <%= partial '_layouts/partials/head_opengraph' %>
+    <%= partial '_layouts/partials/head_pwa' %>
   </head>
   <body>
+    <header>
+      <h1><a href="/"><%= data.site.name %></a></h1>
+    </header>
     <%= yield %>
-    <script src="<%= asset_path(:js, 'main') %>"></script>
+    <script src="<%= asset_path(:js, 'manifest.main') %>"></script>
   </body>
 </html>

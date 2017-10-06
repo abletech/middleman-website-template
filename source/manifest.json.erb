@@ -1,0 +1,15 @@
+{
+  "name": "<%= data.site.name %>",
+  "short_name": "<%= data.site.pwa.short_name %>",
+  "description": "<%= data.site.description %>",
+  <% if data.site.pwa.orientation %>
+  "orientation": "<%= data.site.pwa.orientation %>",
+  <% end %>
+  <% if data.site.pwa.display %>
+  "display": "<%= data.site.pwa.display %>",
+  <% end %>
+  "theme_color": "<%= data.site.pwa.theme.background_color %>",
+  "icons": [
+
+  ]
+}

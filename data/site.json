@@ -1,8 +1,29 @@
 {
-  "name": "Middleman Website Template",
-  "description": "A quick way to generate a static site using Ruby, Node, Webpack, and years of distilled experience.",
-  "theme": {
-    "background_color": "#fff",
-    "foreground_color": "#000"
+  "name": "Middleman Website Template", // This appears as a suffix in the <title>
+  "title": "Websites made easy with Middleman", // The default title, overridden on a per-page basis
+  "description": "A quick way to generate a static site using Ruby, Node, Webpack, and years of distilled experience.", // Used as the og:description
+  "lang": "en-NZ",
+  "opengraph": {
+    /*
+      See: http://ogp.me
+
+      title: // defaults to `title` above
+      description: // defaults to `description` above
+      url: // defined by Middleman
+      image: // defaults to '/opengraph.png'
+      site_name: // defaults to `name` above
+      type: // defaults to 'website'
+    */
+  },
+  "pwa": {
+    /*
+    "orientation": "portrait", || "landscape"
+    "display": "standalone",
+    */
+    "theme": {
+      "background_color": "#fff",
+      "foreground_color": "#000"
+    },
+    "short_name": "MMWT" // a 10-character (or less) name
   }
 }
