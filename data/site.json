@@ -1,0 +1,8 @@
+{
+  "name": "Middleman Website Template",
+  "description": "A quick way to generate a static site using Ruby, Node, Webpack, and years of distilled experience.",
+  "theme": {
+    "background_color": "#fff",
+    "foreground_color": "#000"
+  }
+}
