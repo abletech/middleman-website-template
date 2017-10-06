@@ -16,14 +16,26 @@
     */
   },
   "pwa": {
-    /*
-    "orientation": "portrait", || "landscape"
-    "display": "standalone",
-    */
     "theme": {
       "background_color": "#fff",
       "foreground_color": "#000"
     },
+    /*
+    "orientation": "portrait", || "landscape"
+    "display": "standalone",
+    */
+    "icons": [
+      /*
+      {
+        "href": "",
+        "sizes": ""
+      },
+      */
+      {
+        "href": "/favicon.ico",
+        "sizes": "16x16 32x32"
+      }
+    ],
     "short_name": "MMWT" // a 10-character (or less) name
   }
 }

@@ -20,6 +20,9 @@
       <h1><a href="/"><%= data.site.name %></a></h1>
     </header>
     <%= yield %>
+    <% if current_page.url == '/' %>
+    <script src="<%= asset_path(:js, 'manifest.home') %>"></script>
+    <% end %>
     <script src="<%= asset_path(:js, 'manifest.main') %>"></script>
   </body>
 </html>
