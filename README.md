@@ -2,8 +2,17 @@
 
 Here at @abletech, we've standardised on the tools we use to generate static websites. The technologies include:
 
-* Ruby
-* Middleman
+- Ruby
+- Middleman
+- Node
+- Webpack
+- Sass
+
+This static site generator template is written for Middleman. It contains [plenty of rich features every website should have](./FEATURES.md), such as:
+
+- Performance improvements
+- Progressive Web App capabilities
+- Opengraph configuration
 
 ## Installation
 
@@ -13,13 +22,32 @@ Here at @abletech, we've standardised on the tools we use to generate static web
 4. `npm i`
 5. `middleman`
 
-## Testing environment-specific settings using `server`
+## Development
 
-    middleman server -e production
+### Defining JS manifests
 
-## Testing environment-specific builds
+To create the link between Webpack bundles and Middleman's HTML, you need to define each manifest or entry as follows:
 
-    middleman build -e production
+- Define the Webpack entries in `config/entries.js`
+- Create corresonding `<script>` references in in `source/_layouts/layout.erb`
+
+### Defining CSS manifests
+
+- Make sure you've defined a JS manifest above.
+- Require the SCSS/CSS you need in the corresponding JS manifest, e.g. `require('../_scss/manifest.main.css.scss');` so that Webpack is aware of it
+- Create corresonding `<link>` references in in `source/_layouts/layout.erb`
+
+## Build
+
+### Doing environment-specific builds
+
+All builds default to production mode
+
+    middleman build
+
+If you want a STAGING specific build use the following:
+
+    middleman build -e staging
 
 ## Building for STAGING:
 
@@ -33,7 +61,9 @@ Here at @abletech, we've standardised on the tools we use to generate static web
     git pull origin master
     middleman build -e production
 
-## Deployment options
+## Deployment
+
+### Deployment options
 
 Try one of the following gems for deployment options:
 

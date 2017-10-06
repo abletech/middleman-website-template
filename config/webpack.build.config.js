@@ -36,6 +36,14 @@ buildConfig.module = {
             loader: 'css-loader'
           },
           {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './config/postcss.config.js'
+              }
+            }
+          },
+          {
             // Resolves url() paths in SCSS files
             // See: https://github.com/bholloway/resolve-url-loader
             loader: 'resolve-url-loader'
@@ -51,6 +59,14 @@ buildConfig.module = {
           { // translates CSS into CommonJS
             // See: https://webpack.js.org/loaders/css-loader/
             loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './config/postcss.config.js'
+              }
+            }
           },
           {
             // Resolves url() paths in SCSS files

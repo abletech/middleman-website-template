@@ -15,7 +15,7 @@ let PATHS = {
   SOURCE      : getPath.resolve(__dirname, './../source'),
   SOURCE_CSS  : getPath.resolve(__dirname, './../source/css'),
   SOURCE_JS   : getPath.resolve(__dirname, './../source/js'),
-  SOURCE_SCSS : getPath.resolve(__dirname, './../source/scss'),
+  SOURCE_SCSS : getPath.resolve(__dirname, './../source/_scss'),
 };
 
 module.exports = PATHS;
