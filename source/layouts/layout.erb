@@ -15,7 +15,7 @@
     <%= partial 'layouts/partials/head_pwa' %>
     <%= partial 'layouts/partials/head_opengraph', locals: {:page_title => page_title, :page_description => page_description} %>
   </head>
-  <body>
+  <body class="<%= get_page_class() %>">
     <header>
       <h1><a href="/"><%= data.site.name %></a></h1>
     </header>
