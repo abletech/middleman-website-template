@@ -1,4 +1,9 @@
 ---
-title: Welcome to Middleman
+title: '2 x Welcome'
 ---
+<%
+#content_for :page_title, "Welcome #{data.site.name}"
+content_for :page_description do "Homepage description" end
+%>
 
+Hello

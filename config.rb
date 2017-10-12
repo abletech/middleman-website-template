@@ -6,12 +6,9 @@
 
 # Path settings
 set :css_dir, 'css'
-set :data_dir, 'data'
 set :fonts_dir, 'fonts'
-set :helpers_dir, 'helpers'
 set :images_dir, 'img'
 set :js_dir, 'js'
-set :layouts_dir, '_layouts'
 
 activate :directory_indexes
 

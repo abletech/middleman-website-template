@@ -1,0 +1,5 @@
+<% if current_page.url == '/' %>
+  <%= inline_css 'css/manifest.home.css' %>
+<% else %>
+  <link rel="stylesheet" href="<%= asset_path(:css, 'manifest.main') %>">
+<% end %>

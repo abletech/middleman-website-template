@@ -1,19 +1,19 @@
 <!DOCTYPE html>
+<%
+  page_title = yield_if_set(:page_title, current_page.data.page_title)
+  page_description = :page_description
+%>
 <html lang="<%= data.site.lang || 'en' %>">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= current_page.data.title || data.site.title %> | <%= data.site.name %></title>
-    <% if current_page.url == '/' %>
-      <%= inline_css 'css/manifest.home.css' %>
-    <% else %>
-      <link rel="stylesheet" href="<%= asset_path(:css, 'manifest.main') %>">
-    <% end %>
-    <%= partial '_layouts/partials/head_preload' %>
-    <%= partial '_layouts/partials/head_dns_prefetch' %>
-    <%= partial '_layouts/partials/head_opengraph' %>
-    <%= partial '_layouts/partials/head_pwa' %>
+    <%= partial 'layouts/partials/head_title' %>
+    <%= partial 'layouts/partials/head_stylesheets' %>
+    <%= partial 'layouts/partials/head_preload' %>
+    <%= partial 'layouts/partials/head_dns_prefetch' %>
+    <%= partial 'layouts/partials/head_pwa' %>
+    <%= partial 'layouts/partials/head_opengraph', locals: {:page_title => page_title, :page_description => page_description} %>
   </head>
   <body>
     <header>
