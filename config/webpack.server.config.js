@@ -7,6 +7,7 @@ const NameAllModulesPlugin = require('name-all-modules-plugin');
 const baseConfig = require('./webpack.base.config');
 const PATHS = require('./paths');
 const ENVIRONMENT = require('./environment');
+const postCSSConfig = require('./postcss.config');
 
 // Start off with the baseConfig
 let serverConfig = baseConfig;
@@ -31,6 +32,10 @@ serverConfig.module = {
             loader: 'css-loader'
           },
           {
+            loader: 'postcss-loader',
+            options: postCSSConfig
+          },
+          {
             // Resolves url() paths in SCSS files
             // See: https://github.com/bholloway/resolve-url-loader
             loader: 'resolve-url-loader'
@@ -46,6 +51,10 @@ serverConfig.module = {
           { // translates CSS into CommonJS
             // See: https://webpack.js.org/loaders/css-loader/
             loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: postCSSConfig
           },
           {
             // Resolves url() paths in SCSS files

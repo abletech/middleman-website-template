@@ -1,6 +1,3 @@
-// SCSS manifest
-require('../_scss/manifest.main.css.scss');
-
 // JavaScript includes
 require('./_all_pages/menu');
 

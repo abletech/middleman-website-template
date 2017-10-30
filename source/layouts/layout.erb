@@ -21,8 +21,8 @@
     </header>
     <%= yield %>
     <% if current_page.url == '/' %>
-    <script src="<%= asset_path(:js, 'manifest.home') %>"></script>
+    <script src="<%= asset_path(:js, 'script.home') %>"></script>
     <% end %>
-    <script src="<%= asset_path(:js, 'manifest.main') %>"></script>
+    <script src="<%= asset_path(:js, 'script.main') %>"></script>
   </body>
 </html>

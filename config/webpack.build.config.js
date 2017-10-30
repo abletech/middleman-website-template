@@ -6,6 +6,7 @@ const ExtractTextPlugin    = require('extract-text-webpack-plugin');
 const baseConfig  = require('./webpack.base.config');
 const PATHS       = require('./paths');
 const ENVIRONMENT = require('./environment');
+const postCSSConfig = require('./postcss.config');
 
 // Setup
 let buildConfig = baseConfig;
@@ -37,11 +38,7 @@ buildConfig.module = {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              config: {
-                path: './config/postcss.config.js'
-              }
-            }
+            options: postCSSConfig
           },
           {
             // Resolves url() paths in SCSS files
@@ -62,11 +59,7 @@ buildConfig.module = {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              config: {
-                path: './config/postcss.config.js'
-              }
-            }
+            options: postCSSConfig
           },
           {
             // Resolves url() paths in SCSS files

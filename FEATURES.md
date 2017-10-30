@@ -14,6 +14,7 @@ PWA (Progressive web app) features
 - Service Workers
 - Add to Home Screen icons
 - Manifests
+- Touch icon and favicon generator
 
 Opengraph configuration on a per-URL basis
 
@@ -56,3 +57,4 @@ Environment setup for:
   - Gzipping
   - HTML Minification
   - Deployment options
+  - Favicon Maker
