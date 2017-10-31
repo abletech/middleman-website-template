@@ -47,7 +47,7 @@
     "lint:js": "npm run lint:js:source",
     "lint:js:all": "eslint . -c ./config/eslint.json",
     "lint:js:source": "eslint ./source -c ./config/eslint.json",
-    "lint:scss": "stylelint ./source --config ./config/stylelint.json",
+    "lint:scss": "stylelint ./source/_scss/**/*.scss --config ./config/stylelint.json",
     "size": "size-limit",
     "webpack:build": "npm run clean && webpack --config ./config/webpack.build.config.js",
     "webpack:server": "npm run clean:tmp && webpack -w --config ./config/webpack.server.config.js"

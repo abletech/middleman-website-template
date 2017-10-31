@@ -1,22 +1,22 @@
 {
   "name": "<%= data.site.name %>",
   "description": "<%= data.site.description %>",
-  <% if data.site.pwa.try(:orientation) %>
-  "orientation": "<%= data.site.pwa.orientation %>",
+  <% if data.site.try(:orientation) %>
+  "orientation": "<%= data.site.orientation %>",
   <% end %>
-  <% if data.site.pwa.try(:display) %>
-  "display": "<%= data.site.pwa.display %>",
+  <% if data.site.try(:display) %>
+  "display": "<%= data.site.display %>",
   <% end %>
-  "theme_color": "<%= data.site.pwa.theme.background_color %>",
-  <% if data.site.pwa.try(:icons) && data.site.pwa.icons.length > 0 %>
+  "theme_color": "<%= data.site.theme.background_color %>",
+  <% if data.site.try(:icons) && data.site.icons.length > 0 %>
   "icons": [
-    <% data.site.pwa.icons.each_with_index do |icon, index| %>
+    <% data.site.icons.each_with_index do |icon, index| %>
     {
       "href": "<%= icon.href %>",
       "sizes": "<%= icon.sizes %>"
-    }<%= ',' if index + 1 < data.site.pwa.icons.count %>
+    }<%= ',' if index + 1 < data.site.icons.count %>
     <% end %>
   ],
   <% end %>
-  "short_name": "<%= data.site.pwa.short_name %>"
+  "short_name": "<%= data.site.short_name %>"
 }
