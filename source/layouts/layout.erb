@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<%
+  page_title = yield_if_set(:page_title, current_page.data.page_title)
+  page_description = :page_description
+%>
+<html lang="<%= data.site.lang || 'en' %>">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= partial 'layouts/partials/head_title' %>
+    <%= partial 'layouts/partials/head_stylesheets' %>
+    <%= partial 'layouts/partials/head_preload' %>
+    <%= partial 'layouts/partials/head_dns_prefetch' %>
+    <%= partial 'layouts/partials/head_pwa' %>
+    <%= partial 'layouts/partials/head_opengraph', locals: {:page_title => page_title, :page_description => page_description} %>
+  </head>
+  <body class="<%= get_page_class() %>">
+    <header>
+      <h1><a href="/"><%= data.site.name %></a></h1>
+    </header>
+    <%= yield %>
+    <% if current_page.url == '/' %>
+    <script src="<%= asset_path(:js, 'script.home') %>"></script>
+    <% end %>
+    <script src="<%= asset_path(:js, 'script.main') %>"></script>
+  </body>
+</html>

@@ -1,63 +1,105 @@
-env_name = ENV['APP_ENV'] || 'development'
-require "environments/#{env_name}"
-require 'helpers/asset_helpers'
-require 'helpers/csv_helpers'
+# Configuration
+# =================================================================================
 
-# Reload the browser automatically whenever files change
-configure :development do
-  activate :livereload
-end
+# Dependencies
+# See ./helpers
 
-page "/sitemap.xml", :layout => false
-
-set :site_name, 'Site'
-set :env_name, env_name
-set :font_dir, 'fonts'
+# Path settings
 set :css_dir, 'css'
-set :js_dir, 'js'
+set :fonts_dir, 'fonts'
 set :images_dir, 'img'
-
-set :url_root, ApplicationConfig::BASE_URL
-
-# This section generates the pattern-library based on data/patterns.json
-patterns_prefix = 'page_patterns_'
-patterns_section_class = 'patterns'
-
-data.patterns.each do |pattern|
-	proxy "/patterns/#{pattern[:page_name]}",
-	"patterns/template.html",
-	:locals => {
-		:examples => pattern[:examples],
-		:page_name => pattern[:page_name],
-		:page_title => pattern[:page_title],
-		:page_classes => patterns_prefix + pattern[:page_name],
-		:section_class => patterns_section_class,
-		:page_description => pattern[:page_description]
-	},
-	:ignore => true
-end
+set :js_dir, 'js'
 
 activate :directory_indexes
+activate :relative_assets
+set :relative_links, true
 
-activate :autoprefixer do |config|
-  config.browsers = ['last 2 versions', 'Explorer >= 9']
-  config.cascade  = false
+task_build = 'npm run webpack:build'
+task_serve = 'npm run webpack:server'
+
+activate :external_pipeline,
+  name: :webpack,
+  command: build? ? task_build : task_serve,
+  source: '.tmp/dist',
+  latency: 1
+
+activate :robots,
+  :rules => [
+    {:user_agent => '*', :allow => %w(/)}
+  ],
+  :sitemap => '/sitemap.xml'
+
+# Layout settings
+# =================================================================================
+
+page '/*.xml', layout: false
+page '/*.json', layout: false
+page '/*.txt', layout: false
+
+
+configure :development do
+  set :env, 'development'
 end
 
-# Build-specific configuration
-configure :build do
-  activate :gzip do |gzip|
-    gzip.exts = %w(.js .css .html .htm .svg .txt)
+configure :staging do
+  set :env, 'staging'
+end
+
+configure :production do
+  set :env, 'production'
+end
+
+# Server config (Development by default)
+# =================================================================================
+
+configure :server {
+
+  activate :livereload,
+    no_swf: true,
+    livereload_css_target: 'css/style.main.css'
+
+}
+
+# Build config (Production by default)
+# =================================================================================
+
+configure :build {
+
+  ignore '**/.keep'
+
+  if data.site.make_icons == true
+    activate :favicon_maker do |f|
+      # Requires ImageMagick. `brew install ImageMagick`
+      f.template_dir  = 'source/img'
+      f.icons = {
+        'touch-icon-512x512.png' => [
+          { icon: 'mstile-310x310.png', size: '310x310' },
+          { icon: 'apple-touch-icon-precomposed.png', size: '180x180'}
+        ],
+        'touch-icon-256x256.png' => [
+          { icon: 'apple-touch-icon-152x152-precomposed.png', size: '152x152'},
+          { icon: 'mstile-150x150.png', size: '150x150'}
+        ],
+        'touch-icon-96x96.png' => [
+          { icon: 'mstile-70x70.png', size: '70x70' },
+          { icon: 'apple-touch-icon.png', size: '57x57' },
+          { icon: 'favicon.ico', size: '32x32,16x16' }
+        ]
+      }
+    end
   end
-  # For example, change the Compass output style for deployment
+
+  activate :asset_hash, ignore: %w{
+    opengraph.png
+    *touch-icon*.*
+    service-worker.js
+    *.xml
+    *.txt
+    *.json
+    favicon.ico
+  }
+
   activate :minify_css
-
-  # Minify Javascript on build
-  activate :minify_javascript
-  set :js_compressor, Uglifier.new()
-
-  # Enable cache buster
-  activate :asset_hash, :ignore => [/touch-icon/, /opengraph/]
 
   activate :minify_html do |html|
     html.remove_http_protocol    = false
@@ -65,44 +107,13 @@ configure :build do
     html.remove_quotes           = true
     html.remove_intertag_spaces  = true
   end
-end
 
-if ApplicationConfig.const_defined?(:S3)
-  activate :s3_sync do |s3_sync|
-    s3_sync.bucket                     = ApplicationConfig::S3::BUCKET # The name of the S3 bucket you are targeting. This is globally unique.
-    s3_sync.region                     = 'ap-southeast-2'     # The AWS region for your bucket.
-    s3_sync.aws_access_key_id          = ApplicationConfig::S3::ACCESS_ID
-    s3_sync.aws_secret_access_key      = ApplicationConfig::S3::SECRET_KEY
-    s3_sync.delete                     = false # We delete stray files by default.
-    s3_sync.after_build                = false # We do not chain after the build step by default.
-    s3_sync.prefer_gzip                = true
-    s3_sync.path_style                 = true
-    s3_sync.reduced_redundancy_storage = false
-    s3_sync.acl                        = 'public-read'
-    s3_sync.encryption                 = false
+  activate :gzip do |gzip|
+    gzip.exts = %w(.js .css .html .htm .svg .txt .xml .ico)
   end
 
-  caching_policy 'text/css',               max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'application/javascript', max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/gif',              max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/png',              max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/jpeg',             max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/x-icon',           max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'image/svg+xml',          max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'application/font-woff',  max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'application/font-woff2', max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'font/woff',              max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'font/woff2',             max_age: (60 * 60 * 24 * 365), public: true
-  caching_policy 'text/html',              max_age: (60 * 5), public: true
+}
 
-  activate :cloudfront do |cf|
-    cf.access_key_id = ApplicationConfig::S3::ACCESS_ID
-    cf.secret_access_key = ApplicationConfig::S3::SECRET_KEY
-    cf.distribution_id = ApplicationConfig::S3::CLOUDFRONT_DIST_ID
-    cf.filter = /\.html$/i
-  end
+# configure :deploy {
 
-  after_s3_sync do |files_by_status|
-    invalidate(files_by_status[:updated] + files_by_status[:created] + files_by_status[:deleted])
-  end
-end
+# }

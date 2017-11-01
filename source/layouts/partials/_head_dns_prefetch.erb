@@ -1,0 +1,7 @@
+<%
+if data.dns_prefetch.count > 0
+  data.dns_prefetch.each do |entry|
+%><link rel="dns-prefetch" href="<%= entry %>"><%
+  end
+end
+%>

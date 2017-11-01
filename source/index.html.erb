@@ -1,12 +1,9 @@
 ---
-page_classes: 'page_home'
-#page_title: ''
-#page_description: ''
-section_class: 'home'
+title: '2 x Welcome'
 ---
-<header>
-	<h1>Index</h1>
-</header>
-<section>
-	<p>This is your homepage, located at <code>source/index.html.erb</code></p>
-</section>
+<%
+  #content_for :page_title, "Welcome #{data.site.name}"
+  content_for :page_description, "Unique page description"
+%>
+
+Hello

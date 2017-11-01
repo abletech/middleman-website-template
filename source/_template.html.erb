@@ -1,0 +1,16 @@
+---
+title: 'Fallback page title, defaults to `data.site.title`'
+description: 'Fallback page description, defaults to `data.site.description`'
+type: 'Fallback page type, defaults to `data.site.type`'
+image_url: 'Fallback image url for OpenGraph. Don’t use this with asset_hashing, fine for use with fixed URLs, defaults to `data.site.image_url`'
+heading: 'Fallback heading for simple text. Use a content_for :page_heading instead for HTML.'
+---
+<%
+content_for :page_title, "Unique page title for #{data.site.name}"
+content_for :page_description, "Unique page description"
+content_for :page_type, "Unique page type"
+content_for :page_image_url, image_url('my_custom_image.png')
+%>
+<% content_for :page_heading do %>
+My heading (<a href="/">with a link</a>)
+<% end %>
