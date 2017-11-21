@@ -19,7 +19,7 @@ gem install middleman
 Then in your parent directory…
 
 ```
-middleman init PROJECT_NAME -T AbleTech/middleman-website-template
+middleman init PROJECT_NAME -T Well-FED/middleman-website-template
 ```
 
 Middleman will then use this repo as your new project template.
